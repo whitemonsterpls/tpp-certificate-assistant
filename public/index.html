@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Помощник сертификата ТПП</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Локальная программа</p>
+      <h1>Помощник сертификата ТПП</h1>
+      <p class="subtitle">Word → проверка английского текста → заполнение платформы → контроль PDF</p>
+    </div>
+    <div class="local-badge">Данные остаются на компьютере</div>
+  </header>
+
+  <main>
+    <section class="step-card">
+      <div class="step-number">1</div>
+      <div class="step-body">
+        <h2>Загрузите заявку Word</h2>
+        <p>Поддерживаются DOC и DOCX. Исходный файл не изменяется.</p>
+        <div class="row actions">
+          <label class="file-button">Выбрать заявку<input id="word-file" type="file" accept=".doc,.docx"></label>
+          <span id="word-name" class="muted">Файл не выбран</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="step-card">
+      <div class="step-number">2</div>
+      <div class="step-body">
+        <div class="section-heading">
+          <div>
+            <h2>Проверьте распознанные поля</h2>
+            <p>Исправьте перевод, адреса и распределение упаковки или веса до заполнения сайта.</p>
+          </div>
+          <div class="actions">
+            <button id="validate-button" class="secondary">Проверить</button>
+            <button id="save-json-button" class="secondary">Сохранить JSON</button>
+          </div>
+        </div>
+
+        <div id="status" class="status neutral">Загрузите Word-заявку.</div>
+
+        <div class="field-grid">
+          <label class="wide">1. Exporter<textarea id="exporter" rows="4"></textarea></label>
+          <label class="wide">2. Consignee<textarea id="consignee" rows="4"></textarea></label>
+          <label>3. Means of transport and route<textarea id="transportRoute" rows="4"></textarea></label>
+          <label>4. For official use<textarea id="officialUse" rows="4"></textarea></label>
+          <label>5. Country of origin<input id="countryOfOrigin" type="text"></label>
+          <label>6. Supplementary details<textarea id="supplementaryDetails" rows="4"></textarea></label>
+        </div>
+
+        <div class="items-heading">
+          <h3>7–10. Товары, упаковка и вес</h3>
+          <button id="add-item-button" class="secondary small">Добавить товар</button>
+        </div>
+        <div id="items"></div>
+
+        <div class="field-grid declaration">
+          <label>12. Importing country<input id="importingCountry" type="text"></label>
+          <label>Place<input id="declarationPlace" type="text"></label>
+          <label>Date<input id="declarationDate" type="text" placeholder="dd.mm.yyyy"></label>
+        </div>
+
+        <details>
+          <summary>Показать извлечённый текст заявки</summary>
+          <pre id="source-text"></pre>
+        </details>
+      </div>
+    </section>
+
+    <section class="step-card">
+      <div class="step-number">3</div>
+      <div class="step-body">
+        <h2>Откройте платформу и заполните макет</h2>
+        <p>Вход выполните в открывшейся вкладке самостоятельно. Пароль сохраняется только в профиле Edge.</p>
+        <label>Адрес страницы ТПП<input id="platform-url" type="url" placeholder="https://..."></label>
+        <div class="actions spaced">
+          <button id="open-platform-button">Открыть платформу</button>
+          <button id="inspect-platform-button" class="secondary">Проверить поля страницы</button>
+          <button id="fill-platform-button">Заполнить форму</button>
+          <button id="save-download-button" class="danger">Сохранить и скачать PDF</button>
+        </div>
+        <div id="platform-status" class="status neutral">Предварительно указан официальный личный кабинет ТПП РФ. При необходимости замените адрес.</div>
+        <details id="inspection-wrap" hidden>
+          <summary>Найденные элементы страницы</summary>
+          <div class="table-wrap"><table id="inspection-table"></table></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="step-card">
+      <div class="step-number">4</div>
+      <div class="step-body">
+        <h2>Проверьте готовый PDF</h2>
+        <p>Проверка ищет кириллицу и сверяет ключевые реквизиты с данными выше.</p>
+        <div class="row actions">
+          <label class="file-button">Выбрать PDF<input id="pdf-file" type="file" accept=".pdf"></label>
+          <span id="pdf-name" class="muted">Файл не выбран</span>
+        </div>
+        <div id="pdf-status" class="status neutral">Готовый PDF ещё не проверен.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Версия 0.1 · локальный прототип</footer>
+  <script src="/app.js"></script>
+</body>
+</html>

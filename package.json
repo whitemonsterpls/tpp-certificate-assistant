@@ -1,0 +1,20 @@
+{
+  "name": "tpp-certificate-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local assistant for transferring Word applications into the TPP certificate form",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "start:no-browser": "node src/server.js --no-browser",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1",
+    "pdfjs-dist": "^6.3.289",
+    "playwright": "^1.62.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
